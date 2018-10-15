@@ -1,0 +1,98 @@
+<template lang='jade'>
+.viewBox
+  .userRight
+    .userTitle 下级报表
+    .userMain
+      .newTab
+        router-link(to="",:class="{'curr': index === navindex}",v-for='(item,index) in nav',@click.native='changeTime($event,item.value,index)',:key='index') {{item.name}}        
+      .searchDetail
+        noContent(v-if='noContent')
+        table(v-if='!noContent')
+          tbody
+            tr
+              th(v-for='item in th') {{item}}
+          tbody
+            tr(style="bottom:0px;",v-if="list.length===0")
+              td(colspan="100")
+                .notContent(style="padding: 100px 0px;") 
+                  i(class='icon iconfont icon-gantanhao')
+                  | 暂无记录
+            tr(v-for='item in list')
+              td {{item.account}}
+              td {{item.userTypeName}}
+              td {{item.teamCount}}                             
+              td {{item.count}}
+              td 
+      pageNav(:allCount='allCount',:limit='limit',ref='pageNav',@pageTo='pageTo')
+</template>
+<script>
+import { baseUrl } from "../../../assets/js/env";
+import noContent from "../public/noContent";
+import pageNav from "../public/pageNav";
+export default {
+  components: {
+    noContent,
+    pageNav
+  },
+  data() {
+    return {
+      start: 0,
+      limit: 15,
+      navindex: 0,
+      dateFlag: 0,
+      noContent: true,
+      list: [],
+      allCount:1,
+      th: ["账户", "用户类型", "报表人数",  "盈利"],
+      nav: [
+        { name: "今天", value: 0 },
+        { name: "昨天", value: 1 },
+        { name: "本月", value: 2 },
+        { name: "上月", value: 3 }
+      ]
+    };
+  },
+  mounted() {
+    this.getUnderLevelReport();
+  },
+  methods: {
+    //接收pageNav组件分页信号
+    pageTo($event) {
+      this.start = this.limit * ($event - 1);
+      this.getTradeList();
+    },
+    changeTime(e, value, index) {
+      this.start=0;
+      this.navindex = index;
+      this.dateFlag = value;
+      this.$refs.pageNav.reset();
+      this.getUnderLevelReport();
+    },
+    getUnderLevelReport() {
+      this.noContent = true;
+      this.$axios
+        .get(baseUrl + "/api/proxy/getUnderLevelReport", {
+          params: {
+            account: this.$store.state.Globalusername,
+            dateFlag: this.dateFlag,
+            start: this.start,
+            limit: this.limit
+          }
+        })
+        .then(res => {
+          this.list = res.data.data.list;
+          this.allCount = res.data.data.underUserListCount;
+          this.noContent = false;
+        })
+        .catch(error => {
+          console.log("获取列表Error");
+        });
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+@import "../../../assets/scss/agent/lowerReport.scss";
+</style>
+
+

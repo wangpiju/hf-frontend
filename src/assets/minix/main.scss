@@ -1,0 +1,117 @@
+$desw:750;
+@function rem2px($px) {
+  @return $px*320/$desw/20+rem;
+}
+
+@mixin homeBg($pic, $width, $height) {
+  background: url('../../assets/img/home/'+$pic) no-repeat;
+  height: $height;
+  width: $width;
+}
+@mixin lottBg($pic, $width, $height) {
+  background: url('../../../assets/img/lott/'+$pic) no-repeat;
+  height: $height;
+  width: $width;
+}
+@mixin lottSt($pic, $width, $height) {
+  background: url('../../../assets/img/lott/'+$pic) no-repeat;
+  height: $height;
+  width: $width;
+}
+@mixin activityBg($pic, $width, $height) {
+  background: url('../../assets/img/activity/'+$pic) no-repeat;
+  height: $height;
+  width: $width;
+}
+@mixin appdownBg($pic, $width, $height) {
+  background: url('../../assets/img/'+$pic) no-repeat;
+  height: $height;
+  width: $width;
+}
+@mixin helpcenterBg($pic, $width, $height) {
+  background: url('../../assets/img/helpcenter/'+$pic) no-repeat;
+  height: $height;
+  width: $width;
+}
+@mixin loginBg($pic){
+  background: url('../../assets/img/'+$pic) no-repeat;
+}
+%flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+%aitems {
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+}
+
+%jcontent {
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+}
+
+%sbetween {
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -o-justify-content: space-between;
+  justify-content: space-between;
+}
+
+%fdr {
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+  -o-flex-direction: row;
+  flex-direction: row;
+}
+
+%fdc {
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+}
+
+%fr {
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+%faj {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -o-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -o-justify-content: center;
+  justify-content: center;
+}
+
+$color_boss:rgb(175, 58, 49);
+$color_hover:#ED635D;
+$color_btn:#E96A1A;
+$color_btn2:#455467;
+$color_btn3:rgb(95, 82, 160);
+
+@import './globalstyle.scss';
